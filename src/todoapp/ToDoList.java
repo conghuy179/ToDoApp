@@ -5,10 +5,15 @@ import java.util.ArrayList;
 public class ToDoList {
     private ArrayList<Task> tasks;
     private String name;
-
+    public ToDoList() {
+        this.tasks = new ArrayList<Task>();
+    }
 
     public ToDoList(String name) {
         this.tasks = new ArrayList<Task>();
+        this.name = name;
+    }
+    public void setName(String name) {
         this.name = name;
     }
 

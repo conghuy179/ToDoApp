@@ -4,6 +4,10 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+        // Goi driver
+        Driver driver = new Driver(1);
+        //Chay method run trong driver
+        driver.run();
         // Tao ToDoApp
         ToDoApp toDoApp = new ToDoApp();
         // Tao ToDoList
