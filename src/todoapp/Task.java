@@ -17,6 +17,7 @@ public class Task {
         setStatus(DOING);
         this.id = id;
     }
+
     public Task(int id, String name) {
         setStatus(DOING);
         this.id = id;
@@ -62,7 +63,6 @@ public class Task {
     }
 
     public void setStatus(boolean status) {
-
         this.status = status;
     }
 

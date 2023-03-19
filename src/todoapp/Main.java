@@ -1,13 +1,16 @@
 package todoapp;
 
-import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         // Goi driver
-        Driver driver = new Driver(1);
-        //Chay method run trong driver
+        Scanner sc = new Scanner(System.in).useDelimiter("\n");
+        ToDoApp app = new ToDoApp();
+        Driver driver = new Driver(sc, app);
         driver.run();
+        sc.close();
+        /*
         // Tao ToDoApp
         ToDoApp toDoApp = new ToDoApp();
         // Tao ToDoList
@@ -30,5 +33,6 @@ public class Main {
         // Edit ten va status cua task 1
         toDoList.editTaskName(1, "Mua ao moi cho Milu");
         toDoList.editTaskStatus(1, Task.DONE);
+        */
     }
 }
