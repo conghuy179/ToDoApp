@@ -77,11 +77,7 @@ public class ToDoList {
     public void editTaskName(int id, String name) {
         int taskIndex = findTaskIndex(id);
         if (taskIndex != -1) {
-            System.out.print("Type new task's name: ");
-            Scanner sc = new Scanner(System.in).useDelimiter("\n");
-            String newName = sc.next();
-            tasks.get(taskIndex).setName(newName);
-            System.out.println(ANSI_CYAN + "Task's name is changed to: " + tasks.get(taskIndex).getName() + ANSI_RESET);
+            tasks.get(taskIndex).setName(name);
         } else {
             System.out.println(ANSI_RED + "Task with ID = " + id + " doesn't existed." + ANSI_RESET);
         }
@@ -90,35 +86,28 @@ public class ToDoList {
     public void editTaskStatus(int id, boolean status) {
         int taskIndex = findTaskIndex(id);
         if (taskIndex != -1) {
-            String statusString = "DOING";
-            if (tasks.get(taskIndex).getStatus() == true) {
-                statusString = "DONE";
-            }
-            System.out.println("Task's status currently: " + statusString);
-            int selection = -1;
-            do {
-                System.out.println("Press the number to change to: 1 - DOING, 2 - DONE");
-                Scanner sc = new Scanner(System.in);
-                selection = sc.nextInt();
-                if (selection == 1) {
-                    tasks.get(taskIndex).setStatus(Task.DOING);
-                    statusString = "DOING";
-                } else if (selection == 2) {
-                    tasks.get(taskIndex).setStatus(Task.DONE);
-                    statusString = "DONE";
-                } else {
-                    System.out.println(ANSI_RED + "Unknown selection. Please select again." + ANSI_RESET);
-                }
-            } while (selection != 1 && selection != 2);
-            System.out.println(ANSI_CYAN + "Task's status is changed to: " + statusString + ANSI_RESET);
+            tasks.get(taskIndex).setStatus(status);
         } else {
-            System.out.println(ANSI_RED + "Task with ID = " + id + " doesn't existed." + ANSI_RESET);
+           System.out.println(ANSI_RED + "Task with ID = " + id + " doesn't existed." + ANSI_RESET);
         }
     }
 
     public void displayTasks() {
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(ANSI_PURPLE + (i + 1) + ".Task ID - " + tasks.get(i).getId() + " : " + tasks.get(i).getName() + ANSI_RESET);
+            tasks.get(i).getStatusDescription();
+            System.out.println(ANSI_PURPLE + (i + 1) + ".Task ID - " + tasks.get(i).getId() + " : " + tasks.get(i).getName());
+            System.out.println(ANSI_PURPLE + "+ Status: " + tasks.get(i).getStatusDescription());
+            System.out.println(ANSI_PURPLE + "+ Priority: " + tasks.get(i).getPriorityDescription() + ANSI_RESET);
+        }
+    }
+
+    public void editTaskPriority(int id, int priority) {
+        int taskIndex = findTaskIndex(id);
+        if (taskIndex != -1) {
+            tasks.get(taskIndex).setPriority(priority);
+        }
+        else {
+            System.out.println(ANSI_RED + "Task with ID = " + id + " doesn't existed." + ANSI_RESET);
         }
     }
 }

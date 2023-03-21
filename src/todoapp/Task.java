@@ -10,19 +10,21 @@ public class Task {
     private String name;
     private int priority;
     private boolean status;
+    private static int count = 1;
     // private String duedate;
 
 
     public Task(int id) {
         setStatus(DOING);
-        this.id = id;
+        setPriority(LOW_PRIORITY);
+        setId(count++);
     }
 
     public Task(int id, String name) {
         setStatus(DOING);
-        this.id = id;
+        setPriority(LOW_PRIORITY);
+        setId(count++);
         this.name = name;
-
     }
 
     public void setId(int id) {
@@ -68,5 +70,15 @@ public class Task {
 
     public boolean getStatus() {
         return status;
+    }
+
+    public String getStatusDescription() {
+        if (status == DOING) {
+            return "DOING";
+        }
+        if (status == DONE) {
+            return "DONE";
+        }
+        return "Unknown status";
     }
 }
