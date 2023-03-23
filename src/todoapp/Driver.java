@@ -32,7 +32,7 @@ public class Driver {
     private int secondSelection;
 
     public Driver(Scanner sc, ToDoApp app) {
-        this.sc = sc;
+        this.sc = sc.useDelimiter("\n");
         this.app = app;
     }
 
@@ -90,9 +90,8 @@ public class Driver {
                 }
                 System.out.print(ANSI_CYAN + "Write task's name: ");
                 String name = sc.next();
-                int id = 1;
+                int id = selectedTdl.getNextId();
                 Task newTask = new Task(id, name);
-                // newTask.setId(id);
                 selectedTdl.addTask(newTask);
                 selectedTdl.displayTasks();
             } else if (selection == CHOICE_TASK_EDIT) {
@@ -108,7 +107,6 @@ public class Driver {
                     selectedTdl.displayTasks();
                     System.out.println(ANSI_WHITE + "Type ID's number of the task you want to edit: " + ANSI_RESET);
                     int idTask = sc.nextInt();
-                    Task newTask = new Task(idTask);
                     System.out.println("Please enter your choice: ");
                     do {
                         printEditInstruction();
@@ -116,42 +114,36 @@ public class Driver {
 
                         if (secondSelection == CHOICE_TASK_EDIT_NAME) {
                             System.out.print("Type new task's name: ");
-                            Scanner sc = new Scanner(System.in).useDelimiter("\n");
                             String newName = sc.next();
                             selectedTdl.editTaskName(idTask, newName);
-                            newTask.setName(newName);
-                            System.out.println(ANSI_CYAN + "Task's name is changed to: " + newTask.getName() + ANSI_RESET);
+                            System.out.println(ANSI_CYAN + "Task's name is changed to: " + selectedTdl.getTask(idTask).getName() + ANSI_RESET);
                         } else if (secondSelection == CHOICE_TASK_EDIT_STATUS) {
-                            System.out.println("Your task's Status currently is: " + newTask.getStatusDescription());
+                            System.out.println("Your task's Status currently is: " + selectedTdl.getTask(idTask).getStatusDescription());
                             System.out.println("Type the STATUS you want to change: ");
                             System.out.println("1. DOING");
                             System.out.println("2. DONE");
                             int answer = sc.nextInt();
-                            boolean status = new Task(idTask).getStatus();
+                            boolean status = selectedTdl.getTask(idTask).getStatus();
                             if (answer == 1) {
                                 status = Task.DOING;
-                                newTask.setStatus(status);
                             } else if (answer == 2) {
                                 status = Task.DONE;
-                                newTask.setStatus(status);
                             } else {
                                 System.out.println("Unknown status.");
                             }
                             selectedTdl.editTaskStatus(idTask, status);
-                            System.out.println(ANSI_CYAN + "Task's status is changed to: " + newTask.getStatusDescription() + ANSI_RESET);
+                            System.out.println(ANSI_CYAN + "Task's status is changed to: " + selectedTdl.getTask(idTask).getStatusDescription() + ANSI_RESET);
 
 
                         } else if (secondSelection == CHOICE_TASK_EDIT_PRIORITY) {
-                            System.out.println("Your task's priority currently is: " + newTask.getPriorityDescription());
+                            System.out.println("Your task's priority currently is: " + selectedTdl.getTask(idTask).getPriorityDescription());
                             System.out.println("Type number for your task's priority: ");
                             System.out.println("1. Low Priority.");
                             System.out.println("2. Medium Priority.");
                             System.out.println("3. High Priority.");
                             int newPriority = sc.nextInt();
                             selectedTdl.editTaskPriority(idTask, newPriority);
-                            newTask.setPriority(newPriority);
-                            String newPriorityS = newTask.getPriorityDescription();
-                            System.out.println(ANSI_CYAN + "Task's Priority is changed to: " + newPriorityS + ANSI_RESET);
+                            System.out.println(ANSI_CYAN + "Task's Priority is changed to: " + selectedTdl.getTask(idTask).getPriorityDescription() + ANSI_RESET);
                         } else if (secondSelection == CHOICE_TASK_DELETE) {
                             selectedTdl.deleteTask(idTask);
                             break;

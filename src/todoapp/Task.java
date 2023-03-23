@@ -10,20 +10,19 @@ public class Task {
     private String name;
     private int priority;
     private boolean status;
-    private static int count = 1;
     // private String duedate;
 
 
     public Task(int id) {
         setStatus(DOING);
         setPriority(LOW_PRIORITY);
-        setId(count++);
+        setId(id);
     }
 
     public Task(int id, String name) {
         setStatus(DOING);
         setPriority(LOW_PRIORITY);
-        setId(count++);
+        setId(id);
         this.name = name;
     }
 

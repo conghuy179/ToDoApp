@@ -1,7 +1,6 @@
 package todoapp;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ToDoList {
     public static final String ANSI_RED = "\u001B[31m";
@@ -13,6 +12,11 @@ public class ToDoList {
 
     private ArrayList<Task> tasks;
     private String name;
+    private int lastId = 0;
+
+    public int getNextId() {
+        return lastId + 1;
+    }
 
     public ToDoList() {
         this.tasks = new ArrayList<Task>();
@@ -34,6 +38,7 @@ public class ToDoList {
     public void addTask(Task task) {
         boolean existed = taskExisted(task);
         if (!existed) {
+            lastId++;
             tasks.add(task);
             System.out.println(ANSI_CYAN + "Task added: " + task.getName() + ANSI_RESET);
         } else {
@@ -88,8 +93,12 @@ public class ToDoList {
         if (taskIndex != -1) {
             tasks.get(taskIndex).setStatus(status);
         } else {
-           System.out.println(ANSI_RED + "Task with ID = " + id + " doesn't existed." + ANSI_RESET);
+            System.out.println(ANSI_RED + "Task with ID = " + id + " doesn't existed." + ANSI_RESET);
         }
+    }
+
+    public Task getTask(int id) {
+        return 1 <= id && id <= tasks.size() ? tasks.get(id - 1) : null;
     }
 
     public void displayTasks() {
@@ -105,8 +114,7 @@ public class ToDoList {
         int taskIndex = findTaskIndex(id);
         if (taskIndex != -1) {
             tasks.get(taskIndex).setPriority(priority);
-        }
-        else {
+        } else {
             System.out.println(ANSI_RED + "Task with ID = " + id + " doesn't existed." + ANSI_RESET);
         }
     }
