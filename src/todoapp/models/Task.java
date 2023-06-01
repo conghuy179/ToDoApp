@@ -1,4 +1,4 @@
-package todoapp;
+package todoapp.models;
 
 public class Task {
     public static final int LOW_PRIORITY = 1;

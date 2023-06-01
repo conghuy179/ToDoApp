@@ -1,5 +1,7 @@
 package todoapp;
 
+import todoapp.models.ToDoApp;
+
 import java.util.Scanner;
 
 public class Main {

@@ -1,5 +1,9 @@
 package todoapp;
 
+import todoapp.models.Task;
+import todoapp.models.ToDoApp;
+import todoapp.models.ToDoList;
+
 import java.util.Scanner;
 
 

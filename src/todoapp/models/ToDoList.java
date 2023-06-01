@@ -1,4 +1,4 @@
-package todoapp;
+package todoapp.models;
 
 import java.util.ArrayList;
 
